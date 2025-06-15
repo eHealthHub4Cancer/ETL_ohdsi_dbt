@@ -1,0 +1,21 @@
+version: 2
+
+sources:
+  - name: source_data
+    database: aml_report
+    schema: raw
+    config:
+      meta: # changed to config in v1.10
+        contains_pii: true
+        owner: "@DavidAkwuru"
+      # Add tags to this source
+      tags: # changed to config in v1.10
+        - ecom
+        - pii
+
+    tables:
+      - name: aml_biochemistry
+      - name: aml_death_information
+      - name: aml_diagnosis_information
+      - name: aml_personal_information
+      - name: aml_treatment
