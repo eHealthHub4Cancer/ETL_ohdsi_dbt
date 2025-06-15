@@ -1,0 +1,25 @@
+version: 2
+
+sources:
+  - name: source_data
+    database: aml_report
+    schema: raw
+    config:
+      meta: # changed to config in v1.10
+        contains_pii: true
+        owner: "@DavidAkwuru"
+      # Add tags to this source
+      tags: # changed to config in v1.10
+        - pii
+
+    tables:
+      - name: aml_biochemistry
+        description: "Contains biochemistry data for AML patients"
+      - name: aml_death_information
+        description: "Contains death information for AML patients"
+      - name: aml_diagnosis_information
+        description: "Contains diagnosis information for AML patients"
+      - name: aml_personal_information
+        description: "Contains personal information for AML patients"
+      - name: aml_treatment
+        description: "Contains treatment information for AML patients"
