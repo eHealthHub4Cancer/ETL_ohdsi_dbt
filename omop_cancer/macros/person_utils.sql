@@ -30,7 +30,7 @@
    extract(year from current_date) - {{ age }} as year_of_birth,
    NULL as month_of_birth,
    NULL as day_of_birth,
-   NULL as birth_datetime
+   make_timestamp(extract(year from current_date)::int - {{ age }}::int, 1, 1, 0, 0, 0) as birth_datetime
 {% endmacro %}
 
 {% macro generate_default_values() %}

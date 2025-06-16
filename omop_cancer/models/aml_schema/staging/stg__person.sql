@@ -11,6 +11,7 @@ final as (
         lower(trim(sex)) as gender_source_value,
         {{ generate_date('age') }}
     from src
+    where ehealth_id is not null and age is not null
 )
 
 select * from final
