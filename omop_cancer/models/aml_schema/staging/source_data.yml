@@ -15,7 +15,12 @@ sources:
 
     tables:
       - name: aml_biochemistry
+        description: "Biochemistry data related to AML patients"    
       - name: aml_death_information
+        description: "Death information for AML patients"
       - name: aml_diagnosis_information
+        description: "Diagnosis information for AML patients"
       - name: aml_personal_information
+        description: "Personal information of AML patients"
       - name: aml_treatment
+        description: "Treatment information for AML patients"
