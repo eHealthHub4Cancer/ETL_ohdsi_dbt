@@ -11,11 +11,6 @@ load_dotenv()
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Database connection configurations
-DATABASE_CONFIGS = {
-    'postgresql': 'postgresql://username:password@localhost:5432/synthea_omop',
-    }
-
 def main():
     db_host = os.getenv('DB_HOST', 'localhost')
     db_port = os.getenv('DB_PORT', '5432')
@@ -23,6 +18,7 @@ def main():
     db_password = os.getenv('DB_PASSWORD', 'password')
     db_name = os.getenv('DB_NAME', 'synthea_omop')
     db_type = os.getenv('DB_TYPE', 'postgresql')
+    db_schema = os.getenv('DB_SCHEMA', 'raw')
     csv_dir = os.getenv('CSV_DIRECTORY_PATH', 'data/synthea_csv')
 
     # Configuration
@@ -34,7 +30,7 @@ def main():
     database_url = DATABASE_CONFIGS[database_type]
     
     # Initialize and run loader
-    loader = SyntheaDataLoader(database_url, csv_directory)
+    loader = SyntheaDataLoader(database_url=database_url, csv_directory=csv_directory, schema_name=db_schema)
     loader.load_synthea_files()
     
     print("Data loading completed!")
