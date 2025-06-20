@@ -18,9 +18,8 @@ models:
         description: "Year of birth of the person."
         tests:
           - not_null
-          - 
   
-  -name: death
+  - name: death
     description: "OMOP Death table containing death information."
     columns:
       - name: person_id
