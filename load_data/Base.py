@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, text
+from sqlalchemy import create_engine, text, inspect
 from datetime import datetime
 import pandas as pd
 import os
@@ -21,6 +21,7 @@ class SyntheaDataLoader:
         """
         self.engine = create_engine(database_url)
         self.csv_directory = csv_directory
+        self.schema_name = schema_name
         self.create_schema_if_not_exists(schema_name=schema_name)  # Ensure schema exists on initialization
 
     def create_schema_if_not_exists(self, schema_name='raw'):
@@ -125,10 +126,17 @@ class SyntheaDataLoader:
         logger.info(f"Loading {len(df)} rows to {table_name} table...")
         
         try:
+
+            inspector = inspect(self.engine)
+            if table_name in inspector.get_table_names(schema=self.schema_name):
+                with self.engine.begin() as conn:
+                    conn.execute(text(f'TRUNCATE TABLE "{self.schema_name}"."{table_name}"'))
+                if_exists = 'append'
+
             df.to_sql(
                 table_name, 
                 self.engine,
-                schema='raw',  # Change as needed 
+                schema=self.schema_name,  # Change as needed 
                 if_exists=if_exists,  # 'replace', 'append', or 'fail'
                 index=False,
                 chunksize=10000  # Load in chunks for better performance
