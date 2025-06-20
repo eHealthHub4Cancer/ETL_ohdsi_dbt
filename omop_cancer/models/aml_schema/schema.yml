@@ -8,3 +8,26 @@ sources:
 models:
   - name: person
     description: "OMOP Person table containing demographic data."
+    columns:
+      - name: person_id
+        description: "Unique identifier for each person."
+        tests:
+          - not_null
+          - unique
+      - name: year_of_birth
+        description: "Year of birth of the person."
+        tests:
+          - not_null
+          - 
+  
+  -name: death
+    description: "OMOP Death table containing death information."
+    columns:
+      - name: person_id
+        description: "Unique identifier for each person."
+        tests:
+          - not_null
+      - name: death_date
+        description: "Date of death."
+        tests:
+          - not_null
