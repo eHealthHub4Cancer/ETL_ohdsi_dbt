@@ -30,3 +30,64 @@ models:
         description: "Date of death."
         tests:
           - not_null
+
+  - name: observation_period
+    description: "OMOP Observation Period table containing periods of observation."
+    columns:
+      - name: person_id
+        description: "Unique identifier for each person."
+        tests:
+          - not_null
+      - name: observation_period_start_date
+        description: "Start date of the observation period."
+        tests:
+          - not_null
+      - name: observation_period_end_date
+        description: "End date of the observation period."
+        tests:
+          - not_null
+      - name: observation_period_id
+        description: "Unique identifier for the observation period."
+        tests:
+          - not_null
+          - unique
+
+  # - name: visit_occurrence
+  #   description: "OMOP Visit Occurrence table containing visit details."
+  #   columns:
+  #     - name: person_id
+  #       description: "Unique identifier for each person."
+  #       tests:
+  #         - not_null
+  #     - name: visit_concept_id
+  #       description: "Concept ID for the type of visit."
+  #       tests:
+  #         - not_null
+  #     - name: visit_start_date
+  #       description: "Start date of the visit."
+  #       tests:
+  #         - not_null
+  #     - name: visit_end_date
+  #       description: "End date of the visit."
+  #       tests:
+  #         - not_null
+      
+  # - name: condition_occurrence
+  #   description: "OMOP Condition Occurrence table containing medical conditions."
+  #   columns:
+  #     - name: person_id
+  #       description: "Unique identifier for each person."
+  #       tests:
+  #         - not_null
+  #     - name: condition_concept_id
+  #       description: "Concept ID for the condition."
+  #       tests:
+  #         - not_null
+  #     - name: condition_start_date
+  #       description: "Start date of the condition occurrence."
+  #       tests:
+  #         - not_null
+  #     - name: condition_end_date
+  #       description: "End date of the condition occurrence."
+  #       tests:
+  #         - not_null
