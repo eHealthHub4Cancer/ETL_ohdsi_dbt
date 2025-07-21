@@ -39,3 +39,11 @@
     } %}
     {{ return(constants) }}
 {% endmacro %}
+
+{% macro generate_stable_id(id_column) %}
+    -- This macro generates a stable person_id based on the ehealth_id
+    -- It uses the encrypt_id macro to hash the ehealth_id
+    abs(hashtext(
+        {{ id_column }}
+    ))::bigint
+{% endmacro %}
