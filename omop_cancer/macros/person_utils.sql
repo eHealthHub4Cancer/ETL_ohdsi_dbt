@@ -36,14 +36,14 @@
 {% macro generate_default_values() %}
     0 as race_concept_id,
     0 as ethnicity_concept_id,
-    null as location_id,
-    null as provider_id,
-    null as care_site_id,
-    null as gender_source_concept_id,
-    null as race_source_value,
-    null as race_source_concept_id,
-    null as ethnicity_source_value,
-    null as ethnicity_source_concept_id
+    null::integer as location_id,
+    null::integer as provider_id,
+    null::integer as care_site_id,
+    null::integer as gender_source_concept_id,
+    null::varchar as race_source_value,
+    null::integer as race_source_concept_id,
+    null::varchar as ethnicity_source_value,
+    null::integer as ethnicity_source_concept_id
 {% endmacro %}
 
 
