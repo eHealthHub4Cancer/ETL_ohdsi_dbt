@@ -18,5 +18,6 @@
 
 {% macro generate_default_death_values() %}
     -- This macro generates default values for death information
-    0 as cause_source_concept_id
+    null::integer as cause_source_concept_id,
+    null::varchar as cause_source_value
 {% endmacro %}

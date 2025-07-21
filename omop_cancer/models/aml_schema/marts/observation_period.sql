@@ -1,4 +1,11 @@
 -- logic adopted from https://ohdsi.github.io/CommonDataModel/ehrObsPeriods.html.
+{{
+    config(
+        materialized='incremental',
+        unique_key='observation_period_id',
+        incremental_strategy='merge'
+    )
+}}
 
 with src as (
     select 
@@ -75,15 +82,25 @@ base_final as (
 ),
 -- observation period id needs to be unique per omop cdm guidelines.
 -- force uniqueness by generating a surrogate key, and also using DISTINCT keyword.
-final as (
-    SELECT DISTINCT
+get_final as (
+    SELECT
         {{ dbt_utils.generate_surrogate_key(['person_id', 'observation_period_start_date', 'observation_period_end_date', 'gap_flag']) }} as observation_period_id,
         person_id,
         observation_period_start_date,
         observation_period_end_date,
-        observation_period_type_id
+        period_type_concept_id
     FROM base_final
     ORDER BY person_id, observation_period_start_date, observation_period_end_date
+),
+
+processed_final as (
+    select DISTINCT
+        {{ generate_stable_id('observation_period_id') }} as observation_period_id,
+        person_id,
+        observation_period_start_date,
+        observation_period_end_date,
+        period_type_concept_id
+    FROM get_final
 )
 
-select * from final
+select * from processed_final

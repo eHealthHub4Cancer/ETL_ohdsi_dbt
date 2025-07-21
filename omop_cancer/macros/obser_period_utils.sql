@@ -14,5 +14,5 @@
 {% macro generate_observation_period_type_id() %}
     -- This macro generates a default observation period type id
     -- It returns 0 as the default value
-    32817 as observation_period_type_id
+    32817 as period_type_concept_id
 {% endmacro %}

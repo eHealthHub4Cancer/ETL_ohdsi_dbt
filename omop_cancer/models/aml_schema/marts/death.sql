@@ -1,3 +1,11 @@
+{{
+    config(
+        materialized='incremental',
+        unique_key='person_id',
+        incremental_strategy='merge'
+    )
+}}
+
 with source_data as (
     select * from {{ ref('stg__death') }}
 ),
