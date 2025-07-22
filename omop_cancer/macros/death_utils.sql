@@ -21,3 +21,19 @@
     null::integer as cause_source_concept_id,
     null::varchar as cause_source_value
 {% endmacro %}
+
+
+{% macro get_cdm_values() %}
+  {{
+    return({
+      "cdm_source_name": "Ireland Cancer",
+      "cdm_source_abbreviation": "Icancer",
+      "cdm_holder": "eHealthHub",
+      "source_description": "Ireland Cancer project for mapping series of cancer data",
+      "source_documentation_reference": "###",
+      "cdm_etl_reference": "https://github.com/eHealthHub4Cancer/ETL_ohdsi_dbt.git",
+      "source_release_date": "2025-05-30",
+      "cdm_version": "v5.4"
+    })
+  }}
+{% endmacro %}
