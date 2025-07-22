@@ -5,6 +5,23 @@ sources:
     database: aml_report
     schema: aml_schema
 
+    tables:
+      - name: person
+        description: "OMOP Person table containing demographic data."
+      - name: death
+        description: "OMOP Death table containing death information."
+      - name: observation_period
+        description: "OMOP Observation Period table containing periods of observation."
+      - name: vocabulary
+        description: "OMOP Vocabulary table containing concept definitions."
+      - name: cdm_source
+        description: "OMOP CDM Source table containing metadata about the source data."
+    # Uncomment if visit_occurrence and condition_occurrence are needed
+    # - name: visit_occurrence
+    #   description: "OMOP Visit Occurrence table containing visit details."
+    # - name: condition_occurrence
+    #   description: "OMOP Condition Occurrence table containing medical conditions."
+
 models:
   - name: person
     description: "OMOP Person table containing demographic data."
@@ -51,6 +68,18 @@ models:
         tests:
           - not_null
           - unique
+
+  - name: cdm_source
+    description: "OMOP CDM Source table containing metadata about the source data."
+    columns:
+      - name: cdm_source_name
+        description: "Name of the source data."
+        tests:
+          - not_null
+      - name: cdm_source_abbreviation
+        description: "Abbreviation for the source data."
+        tests:
+          - not_null
 
   # - name: visit_occurrence
   #   description: "OMOP Visit Occurrence table containing visit details."
